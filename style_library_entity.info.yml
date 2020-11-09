@@ -1,0 +1,5 @@
+name: 'Style Library Entity'
+type: module
+description: 'Provides a Style Library Entity type for storing css and js resources for themes and modules to use'
+core: 8.x
+package: 'Style Library'

@@ -1,0 +1,12 @@
+style_library_entity.style_library_entity_type.*:
+  type: config_entity
+  label: 'Style Library type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

@@ -1,0 +1,8 @@
+style_library_config.admin:
+  path: '/admin/appearance/style-entity-library'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Style Library Entity'
+    link_id: 'style_library_config.admin'
+  requirements:
+    _permission: 'access administration pages'

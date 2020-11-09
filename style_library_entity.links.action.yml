@@ -1,0 +1,10 @@
+entity.style_library_entity.add_form:
+  route_name: entity.style_library_entity.add_page
+  title: 'Add Style Library'
+  appears_on:
+    - entity.style_library_entity.collection
+entity.style_library_entity_type.add_form:
+  route_name: entity.style_library_entity_type.add_form
+  title: 'Add Style Library type'
+  appears_on:
+    - entity.style_library_entity_type.collection

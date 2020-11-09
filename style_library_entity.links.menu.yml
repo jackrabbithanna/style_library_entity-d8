@@ -1,0 +1,24 @@
+style_library_config.admin:
+  title: 'Style Library Entity'
+  route_name: style_library_config.admin
+  description: 'Style Library Entity'
+  parent: system.themes_page
+  weight: 99
+
+
+# Style Library menu items definition
+entity.style_library_entity.collection:
+  title: 'Style Library List'
+  route_name: entity.style_library_entity.collection
+  description: 'List Style Library entities'
+  parent: style_library_config.admin
+  weight: 99
+
+
+# Style Library type menu items definition
+entity.style_library_entity_type.collection:
+  title: 'Style Library Types'
+  route_name: entity.style_library_entity_type.collection
+  description: 'List Style Library type (bundles)'
+  parent: style_library_config.admin
+  weight: 100

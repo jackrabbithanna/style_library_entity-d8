@@ -1,0 +1,22 @@
+add style library entities:
+  title: 'Create new Style Library entities'
+
+administer style library entities:
+  title: 'Administer Style Library entities'
+  description: 'Allow to access the administration form to configure Style Library entities.'
+  restrict access: true
+
+delete style library entities:
+  title: 'Delete Style Library entities'
+
+edit style library entities:
+  title: 'Edit Style Library entities'
+
+view published style library entities:
+  title: 'View published Style Library entities'
+
+view unpublished style library entities:
+  title: 'View unpublished Style Library entities'
+
+permission_callbacks:
+  - \Drupal\style_library_entity\StyleLibraryEntityPermissions::generatePermissions

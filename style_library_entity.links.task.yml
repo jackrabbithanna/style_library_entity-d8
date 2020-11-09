@@ -1,0 +1,17 @@
+# Style Library routing definition
+
+entity.style_library_entity.canonical:
+  route_name: entity.style_library_entity.canonical
+  base_route: entity.style_library_entity.canonical
+  title: 'View'
+
+entity.style_library_entity.edit_form:
+  route_name: entity.style_library_entity.edit_form
+  base_route: entity.style_library_entity.canonical
+  title: 'Edit'
+
+entity.style_library_entity.delete_form:
+  route_name:  entity.style_library_entity.delete_form
+  base_route:  entity.style_library_entity.canonical
+  title: Delete
+  weight: 10
