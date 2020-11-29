@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
-
+use \Drupal\Component\Utility\Environment;
 /**
  * Defines the Style Library entity.
  *
@@ -278,7 +278,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
     // CSS Files
     $validators = array(
       'file_validate_extensions' => array('css'),
-      'file_validate_size' => array(file_upload_max_size()),
+      'file_validate_size' => array(Environment::getUploadMaxSize()),
     );
     $fields['css_fid'] = BaseFieldDefinition::create('file')
       ->setLabel(t('CSS Files'))
@@ -309,7 +309,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
     // JS files
     $validators = array(
       'file_validate_extensions' => array('js'),
-      'file_validate_size' => array(file_upload_max_size()),
+      'file_validate_size' => array(Environment::getUploadMaxSize()),
     );
 
     $fields['js_fid'] = BaseFieldDefinition::create('file')
