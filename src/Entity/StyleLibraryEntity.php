@@ -153,11 +153,11 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'author',
-        'weight' => 0,
+        'weight' => 10,
       ])
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
+        'weight' => 10,
         'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => '60',
@@ -179,21 +179,164 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
-        'weight' => -4,
+        'weight' => -10,
       ])
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
-        'weight' => -4,
+        'weight' => -10,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
-    $fields['status']->setDescription(t('A boolean indicating whether the Style Library is published.'))
+    $fields['status']->setDescription(t('A boolean indicating whether the Style Library is enabled.'))
+      ->setLabel(t('Enabled'))
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
-        'weight' => -3,
+        'weight' => -9,
       ]);
+
+    /* Additional Fields */
+    // Load globally?
+    // Style Entity Library for D8 generates libraries that can be included via render arrays specifically, or globally?
+    $fields['global'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Load Globally'))
+      ->setDescription(t('Load for every page load, any theme. Do not check this if style library loaded specifically by theme or other modules for specific types of pages or components.'))
+      ->setDefaultValue(TRUE)
+      ->setSettings(['on_label' => 'Global', 'off_label' => 'Render Array'])
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'boolean',
+        'weight' => -8,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => -8,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+
+    // drupal library weights
+    $fields['weight'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Weight'))
+      ->setDescription(t('Order Style Libraries are loaded in.'))
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'integer',
+        'weight' => -6,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'integer_textfield',
+        'weight' => -6,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+    // Extension Type
+    $fields['extension_type'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Extension Type'))
+      ->setDescription(t('Extension type. Used by other modules / themes to further categorize style libraries'))
+      ->setSettings([
+        'max_length' => 50,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -7,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -7,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Additional CSS
+    $fields['add_css'] = BaseFieldDefinition::create('string_long')
+      ->setLabel(t('Additional CSS'))
+      ->setDescription(t('Enter CSS to be loaded when this style library is used. Will take precedence over files uploaded below.'))
+      ->setDefaultValue('')
+      ->setRequired(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'basic_string',
+        'weight' => -4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textarea',
+        'weight' => -4,
+        'settings' => ['rows' => 4],
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+
+
+    // CSS Files
+    $validators = array(
+      'file_validate_extensions' => array('css'),
+      'file_validate_size' => array(file_upload_max_size()),
+    );
+    $fields['css_fid'] = BaseFieldDefinition::create('file')
+      ->setLabel(t('CSS Files'))
+      ->setCardinality(-1)
+      ->setRequired(FALSE)
+      ->setDescription(t('Upload cascading style sheet (CSS) files.'))
+      ->setSetting('upload_validators', $validators)
+      ->setSetting('file_extensions', 'css')
+      ->setSetting('upload_location', 'public://style-library-entity/css')
+      ->setSetting('file_directory', 'style-library-entity/css')
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'file',
+        'weight' => -3,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'file',
+        'settings' => array(
+          'upload_validators' => $validators,
+          'upload_location' => 'public://style-library-entity/css'
+        ),
+        'weight' => -3,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+
+    // JS files
+    $validators = array(
+      'file_validate_extensions' => array('js'),
+      'file_validate_size' => array(file_upload_max_size()),
+    );
+
+    $fields['js_fid'] = BaseFieldDefinition::create('file')
+      ->setLabel(t('JS Files'))
+      ->setCardinality(-1)
+      ->setRequired(FALSE)
+      ->setDescription(t('Upload javascript (JS) files.'))
+      ->setSetting('upload_validators', $validators)
+      ->setSetting('file_extensions', 'js')
+      ->setSetting('upload_location', 'public://style-library-entity/js')
+      ->setSetting('file_directory', 'style-library-entity/js')
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'file',
+        'weight' => -2,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'file',
+        'settings' => array(
+          'upload_validators' => $validators,
+          'upload_location' => 'public://style-library-entity/js'
+        ),
+        'weight' => -2,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
@@ -202,6 +345,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
 
     return $fields;
   }

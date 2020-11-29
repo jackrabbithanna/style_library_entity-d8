@@ -1,0 +1,4 @@
+services:
+  style_library_entity.service:
+    class: 'Drupal\style_library_entity\StyleLibraryEntityService'
+    arguments: ['@entity_type.manager', '@file_system']

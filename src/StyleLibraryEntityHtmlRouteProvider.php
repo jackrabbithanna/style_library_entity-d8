@@ -40,7 +40,7 @@ class StyleLibraryEntityHtmlRouteProvider extends AdminHtmlRouteProvider {
    */
   protected function getSettingsFormRoute(EntityTypeInterface $entity_type) {
     if (!$entity_type->getBundleEntityType()) {
-      $route = new Route("/admin/structure/{$entity_type->id()}/settings");
+      $route = new Route("/admin/appearance/style-library-entity/types/{$entity_type->id()}/settings");
       $route
         ->setDefaults([
           '_form' => 'Drupal\style_library_entity\Form\StyleLibraryEntitySettingsForm',
