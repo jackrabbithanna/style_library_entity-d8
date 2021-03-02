@@ -36,6 +36,10 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *     "edit-form" = "/admin/appearance/style-library-entity/types/style_library_entity_type/{style_library_entity_type}/edit",
  *     "delete-form" = "/admin/appearance/style-library-entity/types/style_library_entity_type/{style_library_entity_type}/delete",
  *     "collection" = "/admin/appearance/style-library-entity/types/style_library_entity_type"
+ *   },
+ *   config_export = {
+ *     "id",
+ *     "label",
  *   }
  * )
  */

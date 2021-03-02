@@ -1,8 +1,8 @@
 {
-  "name": "drupal/style_entity_library",
+  "name": "drupal/style_library_entity",
   "description": "Allows site builders to add and manage CSS and JS",
   "type": "drupal-module",
-  "homepage": "https://www.drupal.org/project/style_entity_library",
+  "homepage": "https://www.drupal.org/project/style_library_entity",
   "authors": [
     {
       "name": "Mark Hanna",
@@ -10,7 +10,7 @@
     }
   ],
   "support": {
-    "source": "https://git.drupal.org/project/style_entity_library.git"
+    "source": "https://git.drupal.org/project/style_library_entity.git"
   },
   "license": "GPL-2.0-or-later",
   "require": {
