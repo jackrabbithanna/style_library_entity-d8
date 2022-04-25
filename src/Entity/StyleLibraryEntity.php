@@ -9,7 +9,8 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
-use \Drupal\Component\Utility\Environment;
+use Drupal\Component\Utility\Environment;
+
 /**
  * Defines the Style Library entity.
  *
@@ -197,8 +198,8 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ]);
 
     /* Additional Fields */
-    // Load globally?
-    // Style Entity Library for D8 generates libraries that can be included via render arrays specifically, or globally?
+    // Style Entity Library for D8 generates libraries that can be included.
+    // Via render arrays specifically, or globally.
     $fields['global'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Load Globally'))
       ->setDescription(t('Load for every page load, any theme. Do not check this if style library loaded specifically by theme or other modules for specific types of pages or components.'))
@@ -216,7 +217,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayConfigurable('view', TRUE)
       ->setDisplayConfigurable('form', TRUE);
 
-    // drupal library weights
+    // Drupal library weights.
     $fields['weight'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Weight'))
       ->setDescription(t('Order Style Libraries are loaded in.'))
@@ -234,7 +235,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
-    // Extension Type
+    // Extension Type.
     $fields['extension_type'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Extension Type'))
       ->setDescription(t('Extension type. Used by other modules / themes to further categorize style libraries'))
@@ -255,7 +256,7 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    // Additional CSS
+    // Additional CSS.
     $fields['add_css'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('Additional CSS'))
       ->setDescription(t('Enter CSS to be loaded when this style library is used. Will take precedence over files uploaded below.'))
@@ -274,12 +275,11 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setDisplayConfigurable('view', TRUE)
       ->setDisplayConfigurable('form', TRUE);
 
-
-    // CSS Files
-    $validators = array(
-      'file_validate_extensions' => array('css'),
-      'file_validate_size' => array(Environment::getUploadMaxSize()),
-    );
+    // CSS Files.
+    $validators = [
+      'file_validate_extensions' => ['css'],
+      'file_validate_size' => [Environment::getUploadMaxSize()],
+    ];
     $fields['css_fid'] = BaseFieldDefinition::create('file')
       ->setLabel(t('CSS Files'))
       ->setCardinality(-1)
@@ -289,28 +289,27 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setSetting('file_extensions', 'css')
       ->setSetting('upload_location', 'public://style-library-entity/css')
       ->setSetting('file_directory', 'style-library-entity/css')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'file',
         'weight' => -3,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'file',
-        'settings' => array(
+        'settings' => [
           'upload_validators' => $validators,
-          'upload_location' => 'public://style-library-entity/css'
-        ),
+          'upload_location' => 'public://style-library-entity/css',
+        ],
         'weight' => -3,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-
-    // JS files
-    $validators = array(
-      'file_validate_extensions' => array('js'),
-      'file_validate_size' => array(Environment::getUploadMaxSize()),
-    );
+    // JS files.
+    $validators = [
+      'file_validate_extensions' => ['js'],
+      'file_validate_size' => [Environment::getUploadMaxSize()],
+    ];
 
     $fields['js_fid'] = BaseFieldDefinition::create('file')
       ->setLabel(t('JS Files'))
@@ -321,22 +320,21 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
       ->setSetting('file_extensions', 'js')
       ->setSetting('upload_location', 'public://style-library-entity/js')
       ->setSetting('file_directory', 'style-library-entity/js')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'file',
         'weight' => -2,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'file',
-        'settings' => array(
+        'settings' => [
           'upload_validators' => $validators,
-          'upload_location' => 'public://style-library-entity/js'
-        ),
+          'upload_location' => 'public://style-library-entity/js',
+        ],
         'weight' => -2,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
@@ -345,7 +343,6 @@ class StyleLibraryEntity extends ContentEntityBase implements StyleLibraryEntity
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
-
 
     return $fields;
   }

@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class StyleLibraryEntitySettingsForm.
+ * Settings form for style library entity module.
  *
  * @ingroup style_library_entity
  */

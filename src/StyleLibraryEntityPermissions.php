@@ -5,14 +5,12 @@ namespace Drupal\style_library_entity;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\style_library_entity\Entity\StyleLibraryEntity;
 
-
 /**
  * Provides dynamic permissions for Style Library of different types.
  *
  * @ingroup style_library_entity
- *
  */
-class StyleLibraryEntityPermissions{
+class StyleLibraryEntityPermissions {
 
   use StringTranslationTrait;
 

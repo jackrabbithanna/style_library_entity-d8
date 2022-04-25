@@ -72,8 +72,11 @@ class StyleLibraryEntityAccessControlHandler extends EntityAccessControlHandler 
    * Test for given 'own' permission.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
-   * @param $operation
+   *   The entity.
+   * @param string $operation
+   *   The operation.
    * @param \Drupal\Core\Session\AccountInterface $account
+   *   The account.
    *
    * @return string|null
    *   The permission string indicating it's allowed.

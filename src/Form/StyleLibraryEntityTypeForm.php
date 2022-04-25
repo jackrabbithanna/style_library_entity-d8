@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class StyleLibraryEntityTypeForm.
+ * Form for creating/updating style library entity types.
  */
 class StyleLibraryEntityTypeForm extends EntityForm {
 

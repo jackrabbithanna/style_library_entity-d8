@@ -34,7 +34,7 @@ class StyleLibraryEntityForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var \Drupal\style_library_entity\Entity\StyleLibraryEntity $entity */
+    /** @var \Drupal\style_library_entity\Entity\StyleLibraryEntity $entity */
     $form = parent::buildForm($form, $form_state);
     $form['extension_type']['widget'][0]['value']['#type'] = 'select';
     $form['extension_type']['widget'][0]['value']['#options'] = [
@@ -72,6 +72,9 @@ class StyleLibraryEntityForm extends ContentEntityForm {
     $this->createAdditionalCssFile($entity);
   }
 
+  /**
+   * Create CSS file from Additional CSS long text field.
+   */
   private function createAdditionalCssFile($style_library) {
     $file_system = \Drupal::service('file_system');
     $directory = 'public://style-library-entity/add-css';
@@ -96,4 +99,5 @@ class StyleLibraryEntityForm extends ContentEntityForm {
       return FALSE;
     }
   }
+
 }

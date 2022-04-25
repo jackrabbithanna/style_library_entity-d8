@@ -27,7 +27,7 @@ class StyleLibraryEntityListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var \Drupal\style_library_entity\Entity\StyleLibraryEntity $entity */
+    /** @var \Drupal\style_library_entity\Entity\StyleLibraryEntity $entity */
     $row['id'] = $entity->id();
     $row['type'] = $entity->bundle();
     $row['name'] = Link::createFromRoute(

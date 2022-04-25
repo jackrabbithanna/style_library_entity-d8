@@ -60,8 +60,6 @@ function style_library_entity_theme_suggestions_style_library_entity(array $vari
 
 /**
  * Implements hook_ENTITY_TYPE_delete().
- *
- * @param $style_library
  */
 function style_library_entity_style_library_entity_delete($style_library) {
   try {
@@ -77,7 +75,7 @@ function style_library_entity_style_library_entity_delete($style_library) {
 /**
  * Implements hook_library_info_build().
  *
- * Setup Drupal "Libraries" for each enabled style library entity
+ * Setup Drupal "Libraries" for each enabled style library entity.
  */
 function style_library_entity_library_info_build() {
   $libraries = [];
@@ -88,13 +86,19 @@ function style_library_entity_library_info_build() {
       $css_urls = $style_library_entity_service->buildCssFileArrayForEntity($style_library);
       if (!empty($css_urls)) {
         foreach ($css_urls as $css_url) {
-          $libraries['style-library-entity-' . $style_library->id()]['css']['theme'][$css_url] = ['type' => 'external', 'weight' => $style_library->get('weight')->value];
+          $libraries['style-library-entity-' . $style_library->id()]['css']['theme'][$css_url] = [
+            'type' => 'external',
+            'weight' => $style_library->get('weight')->value,
+          ];
         }
       }
       $js_urls = $style_library_entity_service->buildJsFileArrayForEntity($style_library);
       if (!empty($js_urls)) {
         foreach ($js_urls as $js_url) {
-          $libraries['style-library-entity-' . $style_library->id()]['js'][$js_url] = ['type' => 'external', 'weight' => $style_library->get('weight')->value];
+          $libraries['style-library-entity-' . $style_library->id()]['js'][$js_url] = [
+            'type' => 'external',
+            'weight' => $style_library->get('weight')->value,
+          ];
         }
       }
     }
@@ -103,18 +107,18 @@ function style_library_entity_library_info_build() {
 }
 
 /**
- * Set the "group" of our style library styles so they take precedence even over the theme
+ * Implements hook_css_alter().
  *
- * @param $css
- * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
+ * Set the group of our style library styles so they take precedence the theme.
  */
 function style_library_entity_css_alter(&$css, AttachedAssetsInterface $assets) {
   if (!empty($css)) {
     foreach ($css as $name => $c) {
       if (strpos($name, 'style-library-entity') !== FALSE) {
-        // give high group number so that css takes precedence ..
+        // Give high group number so that css takes precedence ..
         $css[$name]['group'] = 200;
-        // change type from external to file .. this makes the CSS be included in aggregation
+        // Change type from external to file.
+        // This makes the CSS be included in aggregation.
         $css[$name]['type'] = 'file';
       }
     }
@@ -122,11 +126,9 @@ function style_library_entity_css_alter(&$css, AttachedAssetsInterface $assets) 
 }
 
 /**
- * Implements hook_preprocess_html()
+ * Implements hook_preprocess_html().
  *
- * Load all "global" style library entities libraries to the root of the page build
- *
- * @param $variables
+ * Load global style library entities libraries to the root of the page build.
  */
 function style_library_entity_preprocess_html(&$variables) {
   $style_library_entity_service = \Drupal::service('style_library_entity.service');
